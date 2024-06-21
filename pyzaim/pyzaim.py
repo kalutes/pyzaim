@@ -92,6 +92,7 @@ class ZaimAPI:
         comment=None,
         name=None,
         place=None,
+        receipt_id=None,
     ):
         genre_id = self.genre_stoi[genre]
         category_id = self.genre_to_category[genre_id]
@@ -100,7 +101,7 @@ class ZaimAPI:
         else:
             from_account_id = None
         return self.insert_payment(
-            date, amount, category_id, genre_id, from_account_id, comment, name, place
+            date, amount, category_id, genre_id, from_account_id, comment, name, place, receipt_id
         )
 
     def insert_payment(
@@ -113,6 +114,7 @@ class ZaimAPI:
         comment=None,
         name=None,
         place=None,
+        receipt_id=None,
     ):
         data = {
             "mapping": 1,
@@ -129,6 +131,8 @@ class ZaimAPI:
             data["name"] = name
         if place is not None:
             data["place"] = place
+        if receipt_id is not None:
+            data["receipt_id"] = receipt_id
         return self.auth.post(self.payment_url, data=data)
 
     def update_payment_simple(
@@ -141,6 +145,7 @@ class ZaimAPI:
         comment=None,
         name=None,
         place=None,
+        receipt_id=None,
     ):
         genre_id = self.genre_stoi[genre]
         category_id = self.genre_to_category[genre_id]
@@ -158,6 +163,7 @@ class ZaimAPI:
             comment,
             name,
             place,
+            receipt_id,
         )
 
     def update_payment(
@@ -171,6 +177,7 @@ class ZaimAPI:
         comment=None,
         name=None,
         place=None,
+        receipt_id=None,
     ):
         data = {
             "mapping": 1,
@@ -188,6 +195,8 @@ class ZaimAPI:
             data["name"] = name
         if place is not None:
             data["place"] = place
+        if receipt_id is not None:
+            data["receipt_id"] = receipt_id
         return self.auth.put("{}/{}".format(self.payment_url, data_id), data=data)
 
     def delete_payment(self, data_id):
