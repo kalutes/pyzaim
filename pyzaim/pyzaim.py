@@ -1,8 +1,11 @@
 import calendar
 import datetime
+import logging
 import os
+import threading
 import time
 
+from flask import Flask, render_template, request
 from requests_oauthlib import OAuth1Session
 from selenium.webdriver import Chrome, ChromeOptions, Remote
 from selenium.webdriver.chrome.service import Service
@@ -13,12 +16,31 @@ from tqdm import tqdm
 request_token_url = "https://api.zaim.net/v2/auth/request"
 authorize_url = "https://auth.zaim.net/users/auth"
 access_token_url = "https://api.zaim.net/v2/auth/access"
-callback_uri = "https://www.zaim.net/"
+callback_uri = "http://127.0.0.1:5000/callback"
+
+# Flaskから不要なログを出させない
+werkzeug_logger = logging.getLogger("werkzeug")
+werkzeug_logger.setLevel(logging.ERROR)
+
+app = Flask(__name__)
+
+
+@app.route("/callback", methods=["GET"])
+def index():
+    oauth_verifie = request.args.get("oauth_verifier")
+    return render_template("callback.html", oauth_verifie=oauth_verifie)
+
+
+def run_server():
+    app.run()
 
 
 def get_access_token():
     consumer_id = input("Please input consumer ID : ")
     consumer_secret = input("Please input consumer secret : ")
+    server_thread = threading.Thread(target=run_server)
+    server_thread.daemon = True
+    server_thread.start()
     print("\n")
 
     auth = OAuth1Session(client_key=consumer_id, client_secret=consumer_secret, callback_uri=callback_uri)
@@ -27,6 +49,7 @@ def get_access_token():
 
     # Redirect user to zaim for authorization
     authorization_url = auth.authorization_url(authorize_url)
+    print("\n")
     print("Please go here and authorize : ", authorization_url)
 
     oauth_verifier = input("Please input oauth verifier : ")
