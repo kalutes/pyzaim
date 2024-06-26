@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Oauth Verifier</title>
+</head>
+
+<body>
+    <h2>下記のOuth Verifierをコピーして、入力してpyzaimに入力してください</h2>
+    <div class="container">
+        <pre><code>{{oauth_verifie}}</code></pre>
+        <button onclick="copyToClipboard()">copy</button>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var text = document.querySelector('code').innerText;
+            navigator.clipboard.writeText(text);
+        }
+    </script>
+</body>
+
+<style>
+    pre {
+        background-color: #2d2d2d;
+        border: 1px solid #4d4d4d;
+        border-radius: 3px;
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        overflow: auto;
+        color: #ffffff;
+        display: inline-block;
+        margin: 0;
+    }
+
+    code {
+        font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        font-size: 85%;
+        color: #ffffff;
+        background-color: #2d2d2d;
+        display: inline;
+        margin: 0;
+        padding: 0;
+        white-space: pre;
+    }
+
+    button {
+        height: 30px;
+        line-height: 30px;
+        width: 60px;
+        font-size: 18px;
+        text-align: center;
+        cursor: pointer;
+        border-top: 2px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        background-color: #49f;
+        color: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 0 10px;
+    }
+
+    button:active {
+        -webkit-transform: translate(0, 2px);
+        -moz-transform: translate(0, 2px);
+        transform: translate(0, 2px);
+        border-bottom: none;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+</html>

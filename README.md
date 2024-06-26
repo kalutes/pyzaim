@@ -1,7 +1,7 @@
 # pyzaim
 
 [![PyPI version](https://badge.fury.io/py/pyzaim.svg)](https://badge.fury.io/py/pyzaim)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![logo](https://raw.githubusercontent.com/liebe-magi/pyzaim/main/img/pyzaim.svg)
@@ -29,6 +29,13 @@ pip install pyzaim
 
 - Zaimアカウントの作成
 - Zaim Developersでのアプリケーションの登録 (コンシューマID、コンシューマシークレットの発行)
+
+  1. https://dev.zaim.net/users/login にアクセスし、新しいアプリケーションを追加
+  1. ブラウザアプリを選択し、サービスのURLに以下を入力
+        ```
+        http://127.0.0.1:5000/callback
+        ```
+  1. コンシューマID、コンシューマシークレットが発行される 
 - Google Chromeおよびseleniumの導入
 
 ## 使い方
@@ -44,7 +51,8 @@ get_access_token()
 
 # コンシューマIDとコンシューマシークレットを聞かれるので入力
 # 認証ページのURLが表示されるので、アクセスして許可
-# 遷移先ページのソースコードから「oauth_verifier」と書いてあるコードをコピーして入力
+# 遷移先ページのcopyボタンを押して、oauth_verifierをコピー
+# コピーしたoauth_verifierを入力
 # 問題なければアクセストークンとアクセスシークレットが表示される
 ```
 
@@ -136,6 +144,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/kefi550"><img src="https://avatars.githubusercontent.com/u/46632469?v=4?s=100" width="100px;" alt="kefi550"/><br /><sub><b>kefi550</b></sub></a><br /><a href="https://github.com/liebe-magi/pyzaim/commits?author=kefi550" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/clcl777"><img src="https://avatars.githubusercontent.com/u/77223796?v=4?s=100" width="100px;" alt="tra (とら) (Taisuké)"/><br /><sub><b>tra (とら) (Taisuké)</b></sub></a><br /><a href="https://github.com/liebe-magi/pyzaim/commits?author=clcl777" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
