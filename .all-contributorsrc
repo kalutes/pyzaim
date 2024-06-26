@@ -80,6 +80,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ryohidaka",
+      "name": "日高 凌",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39184410?v=4",
+      "profile": "https://ryohidaka.jp",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 6,
