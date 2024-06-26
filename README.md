@@ -1,7 +1,7 @@
 # pyzaim
 
 [![PyPI version](https://badge.fury.io/py/pyzaim.svg)](https://badge.fury.io/py/pyzaim)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![logo](https://raw.githubusercontent.com/liebe-magi/pyzaim/main/img/pyzaim.svg)
@@ -145,6 +145,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/kefi550"><img src="https://avatars.githubusercontent.com/u/46632469?v=4?s=100" width="100px;" alt="kefi550"/><br /><sub><b>kefi550</b></sub></a><br /><a href="https://github.com/liebe-magi/pyzaim/commits?author=kefi550" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/clcl777"><img src="https://avatars.githubusercontent.com/u/77223796?v=4?s=100" width="100px;" alt="tra (とら) (Taisuké)"/><br /><sub><b>tra (とら) (Taisuké)</b></sub></a><br /><a href="https://github.com/liebe-magi/pyzaim/commits?author=clcl777" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://ryohidaka.jp"><img src="https://avatars.githubusercontent.com/u/39184410?v=4?s=100" width="100px;" alt="日高 凌"/><br /><sub><b>日高 凌</b></sub></a><br /><a href="https://github.com/liebe-magi/pyzaim/commits?author=ryohidaka" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
