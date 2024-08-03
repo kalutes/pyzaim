@@ -396,6 +396,24 @@ class ZaimCrawler:
         self.data = []
         self.current = 0
 
+    def get_account_balances(self):
+        account_balances = {}
+        accounts = self.driver.find_elements(
+            by=By.CLASS_NAME,
+            value="account-name",
+        )
+
+        for account in accounts:
+            account_name = account.find_element(by=By.CLASS_NAME, value="name")
+            account_balance = account.find_elements(
+                by=By.CLASS_NAME, value="value")
+            if not account_balance:
+                continue
+            account_balances[account_name.text] = int(
+                account_balance[0].text[1:].replace(',', ''))
+
+        return account_balances
+
     def get_data(self, year, month, progress=True):
         day_len = calendar.monthrange(int(year), int(month))[1]
         year = str(year)
