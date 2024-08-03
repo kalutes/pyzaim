@@ -379,8 +379,8 @@ class ZaimCrawler:
             if headless:
                 options.add_argument("--headless")
 
-            self.driver = Chrome(service=Service(ChromeDriverManager.install(), options=options))
-                                 
+            self.driver = Chrome(service=Service(ChromeDriverManager().install(), options=options))
+
             if poor:
                 self.driver.set_window_size(480, 270)
         print("Start Chrome Driver.")
