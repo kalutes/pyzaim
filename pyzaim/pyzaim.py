@@ -12,7 +12,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from tqdm import tqdm
-from webdriver_manager.chrome import ChromeDriverManager
 
 request_token_url = "https://api.zaim.net/v2/auth/request"
 authorize_url = "https://auth.zaim.net/users/auth"
@@ -352,7 +351,7 @@ class ZaimAPI:
 
 
 class ZaimCrawler:
-    def __init__(self, user_id, password, headless=False, poor=False, gcf=False):
+    def __init__(self, user_id, password, driver_path=None, headless=False, poor=False, gcf=False):
         options = ChromeOptions()
 
         if gcf:
@@ -368,7 +367,7 @@ class ZaimCrawler:
             options.add_argument("--ignore-certificate-errors")
 
             options.binary_location = os.getcwd() + "/headless-chromium"
-            self.driver = Chrome(ChromeDriverManager().install(), options=options)
+            self.driver = Chrome(os.getcwd() + "/chromedriver", options=options)
         else:
             if poor:
                 options.add_argument("--disable-gpu")
@@ -378,9 +377,17 @@ class ZaimCrawler:
                 options.add_argument("--headless")
             if headless:
                 options.add_argument("--headless")
-
-            self.driver = Chrome(service=Service(ChromeDriverManager().install(), options=options))
-
+            if driver_path == "remote":  # リモート接続も可能（docker-seleniumの利用を想定）
+                options.set_capability("pageLoadStrategy", "eager")
+                self.driver = Remote(
+                    command_executor="http://localhost:4444/wd/hub",
+                    options=options,
+                )
+            elif driver_path is not None:
+                service = Service(driver_path)
+                self.driver = Chrome(service=service, options=options)
+            else:
+                self.driver = Chrome(options=options)
             if poor:
                 self.driver.set_window_size(480, 270)
         print("Start Chrome Driver.")
