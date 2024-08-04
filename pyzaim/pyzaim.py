@@ -368,10 +368,7 @@ class ZaimCrawler:
             options.add_argument("--ignore-certificate-errors")
 
             options.binary_location = os.getcwd() + "/headless-chromium"
-            self.driver = Chrome(
-                service=Service(
-                    ChromeDriverManager().install(),
-                    options=options))
+            self.driver = Chrome(ChromeDriverManager().install(), options=options)
         else:
             if poor:
                 options.add_argument("--disable-gpu")
