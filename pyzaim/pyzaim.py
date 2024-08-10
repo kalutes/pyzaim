@@ -405,19 +405,55 @@ class ZaimCrawler:
 
     def get_account_balances(self):
         account_balances = {}
+
+        # First navigate to the the accounts overview page which lists the full account names.
+        self.driver.get("https://zaim.net/accounts/")
+
+        accounts_table = self.driver.find_element(
+            by=By.TAG_NAME,
+            value="table",
+        )
+
+        account_names = accounts_table.find_elements(by=By.TAG_NAME, value="td")
+
+        for account_name in account_names:
+            # Account name entries do not have a class tag.
+            if not account_name.get_attribute("class"):
+                account_balances[account_name.text] = 0
+
+        # Now that the full account names have been set, get the account balances.
+        self.driver.get("https://id.zaim.net/")
+        time.sleep(1)
+
         accounts = self.driver.find_elements(
             by=By.CLASS_NAME,
             value="account-name",
         )
 
         for account in accounts:
-            account_name = account.find_element(by=By.CLASS_NAME, value="name")
-            account_balance = account.find_elements(
-                by=By.CLASS_NAME, value="value")
-            if not account_balance:
+            # This element only contains a shortened version of the full account
+            # name that was retrieved above.
+            # We must match it to the correct entry.
+            short_account_name = account.find_element(
+                by=By.CLASS_NAME, value="name"
+            ).text.replace(".", "")
+
+            account_balance_element = account.find_elements(
+                by=By.CLASS_NAME, value="value"
+            )
+            if not account_balance_element:
                 continue
-            account_balances[account_name.text] = int(
-                account_balance[0].text[1:].replace(',', ''))
+
+            account_balance = int(
+                account_balance_element[0].text[1:].replace(",", "")
+            )
+
+            for full_account_name in account_balances.keys():
+                if full_account_name.startswith(short_account_name):
+                    account_balances[full_account_name] = account_balance
+
+        for account_name, account_balance in account_balances.items():
+            print(f"{account_name}: {account_balance}")
 
         return account_balances
 
