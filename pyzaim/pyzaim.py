@@ -455,6 +455,7 @@ class ZaimCrawler:
         return account_balances
 
     def get_data(self, year, month, progress=True):
+        self.data = []
         day_len = calendar.monthrange(int(year), int(month))[1]
         year = str(year)
         month = str(month).zfill(2)
