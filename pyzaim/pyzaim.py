@@ -452,9 +452,6 @@ class ZaimCrawler:
                 if full_account_name.startswith(short_account_name):
                     account_balances[full_account_name] = account_balance
 
-        for account_name, account_balance in account_balances.items():
-            print(f"{account_name}: {account_balance}")
-
         return account_balances
 
     def get_data(self, year, month, progress=True):
@@ -486,10 +483,13 @@ class ZaimCrawler:
         self.driver.close()
 
     def crawler(self, year, progress):
-        table = self.driver.find_element(
-            by=By.XPATH,
-            value="//*[starts-with(@class, 'SearchResult-module__list___')]",
-        )
+        try:
+            table = self.driver.find_element(
+                by=By.XPATH,
+                value="//*[starts-with(@class, 'SearchResult-module__list___')]",
+            )
+        except:
+            return False
         lines = table.find_elements(
             by=By.XPATH,
             value="//*[starts-with(@class, 'SearchResult-module__body___')]",
